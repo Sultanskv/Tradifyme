@@ -1,0 +1,145 @@
+{% extends 'client_base.html' %}
+
+{% block main %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Status</title>
+    <style>
+        body {
+            font-family: 'Helvetica', sans-serif;
+            background-color: #ffffff;
+            color: #0033ff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #003cff; /* Gold color */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .order-list {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+        }
+
+        .order-item {
+            background: #ffffff; /* Dark background for cards */
+            margin-bottom: 20px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 112, 239, 0.1);
+            transition: all 0.3s ease-in-out;
+            border-left: 5px solid #0044ff; /* Gold accent */
+        }
+
+        .order-item:hover {
+            box-shadow: 0 8px 16px rgba(255, 215, 0, 0.3); /* Gold shadow on hover */
+            transform: translateY(-5px);
+        }
+
+        .order-item h2 {
+            font-size: 1.7rem;
+            margin-bottom: 15px;
+            color: #0033ff; /* Gold color */
+            text-transform: uppercase;
+        }
+
+        .order-item table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .order-item table, .order-item th, .order-item td {
+            border: 1px solid #005eff; /* Gold border */
+        }
+
+        .order-item th, .order-item td {
+            padding: 12px;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .order-item th {
+            background-color: #ffffff;
+            color: #004cff; /* Gold color */
+        }
+
+        .order-item td {
+            background-color: #ffffff;
+            color: #003cff;
+        }
+
+        .no-orders {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.4rem;
+            color: #0055ff; /* Gold color */
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Order Status</h1>
+
+<ul class="order-list">
+{% if orders %}
+    {% for order in orders %}
+        <li class="order-item">
+            <h2>Order ID: {{ order.orderid }}</h2>
+            <table>
+                <tr>
+                    <th>Trading Symbol</th>
+                    <td>{{ order.tradingsymbol }}</td>
+                </tr>
+                <tr>
+                    <th>Quantity</th>
+                    <td>{{ order.quantity }}</td>
+                </tr>
+                <tr>
+                    <th>Order Type</th>
+                    <td>{{ order.ordertype }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{{ order.orderstatus }}</td>
+                </tr>
+                <tr>
+                    <th>Execution Price</th>
+                    <td>{{ order.averageprice }}</td>
+                </tr>
+                <tr>
+                    <th>Transaction Type</th>
+                    <td>{{ order.transactiontype }}</td>
+                </tr>
+                <tr>
+                    <th>Update Time</th>
+                    <td>{{ order.updatetime }}</td>
+                </tr>
+                <tr>
+                    <th>Update</th>
+                    <td>{{ order.text }}</td>
+                </tr>
+            </table>
+        </li>
+    {% endfor %}
+{% else %}
+    <div class="no-orders">
+        <p>No orders found.</p>
+    </div>
+{% endif %}
+</ul>
+
+</body>
+</html>
+{% endblock %}

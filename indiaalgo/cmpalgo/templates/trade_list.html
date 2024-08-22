@@ -1,0 +1,122 @@
+{% extends 'client_base.html' %}
+{% block main %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trade List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff; /* Black background */
+            color: #0059ff; /* Gold color */
+        }
+        .card {
+            word-wrap: break-word;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 191, 255, 0.3); /* Gold shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 98, 255, 0.5); /* Gold shadow on hover */
+        }
+        .container {
+            margin-top: 50px;
+            box-shadow: 0 10px 20px rgba(0, 89, 255, 0.5); /* Gold shadow on hover */
+        }
+        .table {
+            margin-top: 20px;
+            color: #0077ff; /* Gold color */
+        }
+        .table th, .table td {
+            vertical-align: middle;
+            text-align: center;
+            background-color: #ffffff; /* Black background */
+        }
+        .thead-dark th {
+            background-color: #fcfcfc; /* Dark background for table headers */
+            color: #0055ff; /* Gold text for headers */
+        }
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #ffffff; /* Dark grey for odd rows */
+        }
+        .table-striped tbody tr:nth-of-type(even) {
+            background-color: #ffffff; /* Slightly lighter grey for even rows */
+        }
+        .table-bordered {
+            border: 1px solid #0091ff; /* Gold border */
+        }
+        h1 {
+            margin-bottom: 30px;
+            color: #0099ff; /* Gold color for headings */
+        }
+        @media (max-width: 768px) {
+            h1 {
+                text-align: center;
+            }
+        }
+        @media (min-width: 992px) {
+            .container {
+                max-width: 1400px;
+            }
+        }
+        .fade-in {
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .white-text {
+            color: #0055ff !important; /* White text */
+        }
+        a {
+  color: #0048ff;
+  text-decoration: none;
+  background-color: transparent;
+}
+.table .thead-dark th {
+  color: #075aff;
+  background-color: #ffffff;
+  border-color: #65b2ff;
+}
+    </style>
+</head>
+<body>
+<div class="container fade-in">
+    <h1 class="text-center glow">Signals</h1>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Trade Type</th>
+                    <th>Symbol</th>
+                    <th>Price</th>
+                    <th>Lot Size</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for trade in trades %}
+                <tr>
+                    <td class="white-text">{{ trade.id }}</td>
+                    <td class="white-text">{{ trade.trade_type }}</td>
+                    <td class="white-text">{{ trade.symbol }}</td>
+                    <td class="white-text">{{ trade.price }}</td>
+                    <td class="white-text">{{ trade.lot_size }}</td>
+                    <td class="white-text">{{ trade.timestamp }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}

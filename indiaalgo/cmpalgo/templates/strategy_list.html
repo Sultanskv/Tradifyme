@@ -1,0 +1,150 @@
+{% extends 'admin_base.html' %}
+
+{% block main %}
+<style>
+    .row {
+        margin: 15px 0;
+    }
+    
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #007bff;
+        color: white;
+        padding: 15px;
+        border-radius: 10px 10px 0 0;
+    }
+    
+    .card-title {
+        margin: 0;
+        font-size: 24px;
+    }
+    
+    .btn-primary {
+        background-color: #0056b3;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        background-color: #004080;
+    }
+    
+    .table-container {
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .table {
+        margin-bottom: 0;
+        width: 100%;
+        background-color: white;
+    }
+    
+    .table th,
+    .table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+    
+    .table thead th {
+        background-color: #6c757d;
+        color: white;
+        font-weight: bold;
+    }
+    
+    .table tbody tr:hover {
+        background-color: #f0f8ff;
+    }
+    
+    .btn-danger {
+        background-color: #dc3545;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+    
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .action-buttons div {
+        margin-right: 10px;
+    }
+</style>
+
+<div class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Strategy List</h4>
+                    <a href="{% url 'create_strategy' %}" class="btn btn-primary">Add New Strategy</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive table-container">
+                        <table class="table tablesorter table-bordered table-hover" id="example">
+                            <thead class="text-primary bg-secondary">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Strategy</th>
+                                    <th>Created_at</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for strategy in strategy %}
+                                <tr>
+                                    <td>{{ strategy.id }}</td>
+                                    <td>{{ strategy.Strategy }}</td>                             
+                                    <td>{{ strategy.created_at }}</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <div>
+                                                <a href="{% url 'update_strategy' strategy_id=strategy.id %}" class="btn btn-primary">Update</a>
+                                            </div>
+                                            <div>
+                                                <form action="{% url 'delete_strategy' strategy_id=strategy.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </td>                                   
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if error == "no" %}
+<script>
+    alert('Signup Successful');
+    window.location = ('{% url 'strategy_list' %}');
+</script>
+{% endif %}
+{% if error == "yes" %}
+<script>
+    alert('Something went wrong, Try Again...');
+</script> 
+{% endif %}
+
+{% endblock %}
