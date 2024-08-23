@@ -325,6 +325,199 @@
         transform: translateY(0);
       }
     }
+    /* Adjust for mobile view */
+@media (max-width: 768px) {
+    .navbar-custom .navbar-nav {
+        display: none;
+    }
+
+    .burger-menu {
+        display: flex;
+    }
+
+    .navbar-center-icons {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-center-icons .nav-item {
+        margin-right: 15px;
+    }
+
+    .navbar-center-icons .nav-item:last-child {
+        margin-right: 0;
+    }
+}
+/* Default desktop view settings */
+.navbar-center-icons {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+.navbar-custom .nav-link i {
+    font-size: 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    color: #fff;
+}
+
+/* 3D Effect with shadows for each icon */
+.navbar-custom .nav-link i.fa-sliders-h {
+    color: #ff5733;
+    text-shadow: 0px 5px 10px rgba(255, 87, 51, 0.5);
+}
+
+.navbar-custom .nav-link i.fa-signal {
+    color: #28a745;
+    text-shadow: 0px 5px 10px rgba(40, 167, 69, 0.5);
+}
+
+.navbar-custom .nav-link i.fa-history {
+    color: #ffc107;
+    text-shadow: 0px 5px 10px rgba(255, 193, 7, 0.5);
+}
+
+.navbar-custom .nav-link i.fa-first-order-alt {
+    color: #007bff;
+    text-shadow: 0px 5px 10px rgba(0, 123, 255, 0.5);
+}
+
+.navbar-custom .nav-link i.fa-chart-line {
+    color: #6610f2;
+    text-shadow: 0px 5px 10px rgba(102, 16, 242, 0.5);
+}
+
+.navbar-custom .nav-link i.fa-headset {
+    color: #dc3545;
+    text-shadow: 0px 5px 10px rgba(220, 53, 69, 0.5);
+}
+
+.navbar-custom .nav-link i.fa-home {
+    color: #17a2b8;
+    text-shadow: 0px 5px 10px rgba(23, 162, 184, 0.5);
+}
+
+.navbar-custom .nav-link i.fa-bell {
+    color: #ff6347;
+    text-shadow: 0px 5px 10px rgba(255, 99, 71, 0.5);
+}
+
+.navbar-custom .nav-link i.fa-user-circle {
+    color: #20c997;
+    text-shadow: 0px 5px 10px rgba(32, 201, 151, 0.5);
+}
+
+/* Hover animations for 3D effect */
+.navbar-custom .nav-link i:hover {
+    transform: translateY(-5px) scale(1.2);
+    text-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Extra animations for specific icons */
+.navbar-custom .nav-link i.fa-bell:hover {
+    animation: shake 0.5s ease-in-out;
+}
+
+.navbar-custom .nav-link i.fa-user-circle:hover {
+    animation: spin 0.8s ease-in-out;
+}
+
+/* Shake animation for bell icon */
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    50% { transform: rotate(15deg); }
+    75% { transform: rotate(-15deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Spin animation for profile icon */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Custom glow effect for all icons on hover */
+.navbar-custom .nav-link i:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+/* Mobile Sidebar 3D and Animated Icons */
+.mobile-sidebar .nav-link i {
+    font-size: 22px;
+    transition: all 0.3s ease;
+    position: relative;
+    color: #fff;
+}
+
+/* Specific colors and 3D effects for each icon */
+.mobile-sidebar .nav-link i.fa-sliders-h {
+    color: #ff5733;
+    text-shadow: 0px 4px 8px rgba(255, 87, 51, 0.5);
+}
+
+.mobile-sidebar .nav-link i.fa-signal {
+    color: #28a745;
+    text-shadow: 0px 4px 8px rgba(40, 167, 69, 0.5);
+}
+
+.mobile-sidebar .nav-link i.fa-history {
+    color: #ffc107;
+    text-shadow: 0px 4px 8px rgba(255, 193, 7, 0.5);
+}
+
+.mobile-sidebar .nav-link i.fa-first-order-alt {
+    color: #007bff;
+    text-shadow: 0px 4px 8px rgba(0, 123, 255, 0.5);
+}
+
+.mobile-sidebar .nav-link i.fa-chart-line {
+    color: #6610f2;
+    text-shadow: 0px 4px 8px rgba(102, 16, 242, 0.5);
+}
+
+.mobile-sidebar .nav-link i.fa-headset {
+    color: #dc3545;
+    text-shadow: 0px 4px 8px rgba(220, 53, 69, 0.5);
+}
+
+.mobile-sidebar .nav-link i.fa-home {
+    color: #17a2b8;
+    text-shadow: 0px 4px 8px rgba(23, 162, 184, 0.5);
+}
+
+/* Hover animations for icons in the mobile sidebar */
+.mobile-sidebar .nav-link i:hover {
+    transform: translateY(-5px) scale(1.2);
+    text-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Additional animations */
+.mobile-sidebar .nav-link i.fa-bell:hover {
+    animation: shake 0.5s ease-in-out;
+}
+
+.mobile-sidebar .nav-link i.fa-user-circle:hover {
+    animation: spin 0.8s ease-in-out;
+}
+
+/* Shake animation */
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg); }
+    50% { transform: rotate(15deg); }
+    75% { transform: rotate(-15deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Spin animation */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
   </style>
 </head>
 
@@ -337,57 +530,59 @@
           <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
             <img src="{% static '.jpeg' %}" width="150" height="50" class="navbar-brand">
             <div class="collapse navbar-collapse">
-              <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'client_dashbord' %}">
+                            <i class="fa-solid fa-sliders-h"></i> Panel
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'trade_list' %}">
+                            <i class="fa-solid fa-signal"></i> Signals
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'client_trade_history' %}">
+                            <i class="fa-solid fa-history"></i> P&L
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'fetch_and_display_orders' %}">
+                            <i class="fa-brands fa-first-order-alt"></i> Broker Response
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'client_status' %}">
+                            <i class="fa-solid fa-chart-line"></i> Status
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'client_help_center' %}">
+                            <i class="fa-solid fa-headset"></i> Support
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'homes' %}">
+                            <i class="fa-solid fa-home"></i> Home
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-center-icons">
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'client_dashbord' %}" class="{% if request.path == '/dashbord/' %} active {% endif %}">
-                    <i class="fa-solid fa-sliders-h"></i> Panel
-                  </a>
+                    <a class="nav-link" href="#" id="notificationIcon"><i class="fa-solid fa-bell"></i></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'trade_list' %}" class="{% if request.path == '/trade_list/' %} active {% endif %}">
-                    <i class="fa-solid fa-signal"></i> Signals
-                  </a>
+                    <a class="nav-link" href="#" id="profileIcon"><i class="fa-solid fa-user-circle"></i></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'client_trade_history' %}" class="{% if request.path == '/client_trade_history/' %} active {% endif %}">
-                    <i class="fa-solid fa-history"></i> P&L
-                  </a>
+                    <button class="btn" id="brokerConnectButton">API Connect</button>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'fetch_and_display_orders' %}" class="{% if request.path == '/fetch_and_display_orders/' %} active {% endif %}">
-                    <i class="fa-brands fa-first-order-alt"></i> Broker Response
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'client_status' %}" class="{% if request.path == '/tradingstatus/' %} active {% endif %}">
-                    <i class="fa-solid fa-chart-line"></i> Status
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'client_help_center' %}" class="{% if request.path == '/client_help_center/' %} active {% endif %}">
-                    <i class="fa-solid fa-headset"></i> Support
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'homes' %}" class="{% if request.path == '/homes/' %} active {% endif %}">
-                    <i class="fa-solid fa-home"></i> Home
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#" id="notificationIcon"><i class="fa-solid fa-bell"></i></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#" id="profileIcon"><i class="fa-solid fa-user-circle"></i></a>
-                </li>
-                <li class="nav-item">
-                  <button class="btn" id="brokerConnectButton">API Connect</button>
-                </li>
-              </ul>
             </div>
             <div class="burger-menu">
-              <i class="fa-solid fa-bars"></i>
+                <i class="fa-solid fa-bars"></i>
             </div>
-          </nav>
+        </nav>
 
           <!-- Notification Popup -->
           <div class="notification-popup" id="notificationPopup">
@@ -471,43 +666,44 @@
   <!-- Mobile Sidebar -->
   <div class="mobile-sidebar" id="mobileSidebar">
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'client_dashbord' %}" class="{% if request.path == '/dashbord/' %} active {% endif %}">
-          <i class="fa-solid fa-sliders-h"></i> Panel
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'trade_list' %}" class="{% if request.path == '/trade_list/' %} active {% endif %}">
-          <i class="fa-solid fa-signal"></i> Levels
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'client_trade_history' %}" class="{% if request.path == '/client_trade_history/' %} active {% endif %}">
-          <i class="fa-solid fa-history"></i> P&L Account
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'fetch_and_display_orders' %}" class="{% if request.path == '/fetch_and_display_orders/' %} active {% endif %}">
-          <i class="fa-brands fa-first-order-alt"></i> Order Details
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'client_status' %}" class="{% if request.path == '/tradingstatus/' %} active {% endif %}">
-          <i class="fa-solid fa-chart-line"></i> Activity
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'client_help_center' %}" class="{% if request.path == '/client_help_center/' %} active {% endif %}">
-          <i class="fa-solid fa-headset"></i> Support
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'homes' %}" class="{% if request.path == '/homes/' %} active {% endif %}">
-          <i class="fa-solid fa-home"></i> Home
-        </a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'client_dashbord' %}">
+                <i class="fa-solid fa-sliders-h"></i> Panel
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'trade_list' %}">
+                <i class="fa-solid fa-signal"></i> Levels
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'client_trade_history' %}">
+                <i class="fa-solid fa-history"></i> P&L Account
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'fetch_and_display_orders' %}">
+                <i class="fa-brands fa-first-order-alt"></i> Order Details
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'client_status' %}">
+                <i class="fa-solid fa-chart-line"></i> Activity
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'client_help_center' %}">
+                <i class="fa-solid fa-headset"></i> Support
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'homes' %}">
+                <i class="fa-solid fa-home"></i> Home
+            </a>
+        </li>
     </ul>
-  </div>
+</div>
+
 
   <!-- Include jQuery and Bootstrap JavaScript in the correct order -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

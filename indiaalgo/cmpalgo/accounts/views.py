@@ -2959,6 +2959,27 @@ def off(request):
     client_user.save()
     return redirect('client_dashbord')
   #  return HttpResponse('run')
+
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
+
+
+def off_api():
+    print('run off_api')
+    client_user = ind_clientDT.objects.all()
+    for user in client_user:
+        print(f'run off_api {user}')
+        user.clint_plane = 'Demo'
+        user.save()
+   
+    return redirect('client_home')
+
+scheduler.add_job(off_api, CronTrigger(hour=20, minute=12, timezone='Asia/Kolkata'))
+scheduler.add_job(off_api, CronTrigger(hour=20, minute=18, timezone='Asia/Kolkata'))
+scheduler.add_job(off_api, CronTrigger(hour=21, minute=18, timezone='Asia/Kolkata'))
+scheduler = BackgroundScheduler()
+# Start the scheduler
+scheduler.start()
   
 def smartapi_callback(request):
     auth_token = request.GET.get('auth_token')
