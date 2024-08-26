@@ -2775,7 +2775,7 @@ def redirect_to_smartapi_login(request):
                 return redirect(redirect_url)
             elif broker_name == 'Upstox':
                 api_key = client_user.api_key
-                redirect_uri = "https://app.anvestors.com/handle-smartapi-redirect/"  # Your redirect URI
+                redirect_uri = "https://app.tradifyme.com/handle-smartapi-redirect/"  # Your redirect URI
                 state = "RnJpIERlYyAxNiAyMDIyIDE1OjU4OjUxIEdNVCswNTMwIChJbmRpYSBTdGFuZGFyZCBUaW1lKQ=="  # You can generate a unique state value for each request
                 redirect_url = f"https://api.upstox.com/v2/login/authorization/dialog?response_type=code&client_id={api_key}&redirect_uri={redirect_uri}&state={state}"
                 return redirect(redirect_url)
@@ -2855,7 +2855,7 @@ def handle_smartapi_redirect(request):
             if auth_code:
                 # Exchange auth code for access token
                 token_url = "https://api.upstox.com/v2/login/authorization/token"
-                redirect_uri = "https://app.anvestors.com/handle-smartapi-redirect/"
+                redirect_uri = "https://app.tradifyme.com/handle-smartapi-redirect/"
                 
                 payload = {
                     'grant_type': 'authorization_code',
