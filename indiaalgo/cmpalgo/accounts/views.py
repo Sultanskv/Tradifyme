@@ -1935,147 +1935,126 @@ def client_logout(request):
     # return redirect('')
 
 ###########################  clint login method start ####################################
+from sub_admin.models import sub_adminDT
+
 @csrf_protect
 def client_registration(request):
     error = ""
     groups = GROUP.objects.all()
-    strategies = Strategy.objects.all()  # Fetch all strategies
+    strategies = Strategy.objects.all()
     brokers = BROKERS.objects.all()
+    subadmin = sub_adminDT.objects.all()
     
+    options = ind_clientDT.OPTIONS
+
     if request.method == "POST":
-        c_fname = request.POST['fname']
-        c_lname = request.POST['lname']
-        c_mno = request.POST['mobile']
-        c_email = request.POST['email']
-        c_from_date = request.POST['fromdate']
-        c_last_date = request.POST['todate']
-        password = request.POST['pwd']
-        group_id = request.POST['group']
-        # account_type = request.POST['Acount_type']
-        account_type = request.POST.get('Account_type')
-        broker_id = request.POST['Broker']
-        api_key = request.POST['api_key']
-        secret_key = request.POST['secret_key']
-        
-        upstox_api_key = request.POST['api_key']
-        upstox_secret_key = request.POST['secret_key']
-        
-        five_paisa_api_key = request.POST['api_key']
-        five_paisa_user_id = request.POST['user_id']
-        five_paisa_secret_key = request.POST['secret_key']
-        app_id = request.POST['app_id']
-        user_id = request.POST['user_id']
-        selected_strategies = request.POST.getlist('strategies')  # Get selected strategies
-        
-        # Initialize api_key_to_use with a default value
-        api_key_to_use = None
-        secret_key_to_use = None
-
-        if broker_id == 'Angel One':
-            api_key_to_use = 'api_key'
-            # Angel One specific logic
-
-        elif broker_id == 'Alice Blue':
-            user_id_to_use = 'user_id'
-            secret_key_to_use = 'secret_key'
-            # Alice Blue specific logic
-
-        elif broker_id == 'Upstox':
-            api_key_to_use = 'upstox_api_key'
-            secret_key_to_use = 'upstox_secret_key'
-            # Upstox specific logic
-
-        elif broker_id == '5Paisa':
-            api_key_to_use = 'five_paisa_api_key'
-            user_id_to_use = 'five_paisa_user_id'
-            secret_key_to_use = 'five_paisa_secret_key'
-            # 5Paisa specific logic
-
-        # You can now safely use api_key_to_use
-        if api_key_to_use is None:
-            raise ValueError("No API key found for the given broker")
+        c_fname = request.POST.get('fname')
+        c_lname = request.POST.get('lname')
+        c_mno = request.POST.get('mobile')
+        c_email = request.POST.get('email')
+        c_from_date = request.POST.get('fromdate')
+        c_last_date = request.POST.get('todate')
+        password = request.POST.get('pwd')
+        group_id = request.POST.get('group')
+        account_type = request.POST.get('Acount_type')
+        broker_id = request.POST.get('Broker')
+        api_key = request.POST.get('api_key', '')
+        secret_key = request.POST.get('secret_key', '')
+        app_id = request.POST.get('app_id')
+        # demate_user_id = request.POST.get('demate_user_id', '')
+        user_id = request.POST.get('user_id', '')
+        password_brokar = request.POST.get('password', '')
+        sub_admin = request.POST.get('sub_admin')
+        selected_option = request.POST.get('selected_option')
 
         try:
-            try:
-                u = ind_clientDT.objects.get(clint_email=c_email)
-                return render(request, 'register.html', {'msg':'Email already registered'}) 
-            
-            except ind_clientDT.DoesNotExist:    
-                Group = None
-                if group_id:
-                    try:
-                        Group = GROUP.objects.get(id=group_id)
-                    except GROUP.DoesNotExist:
-                        return render(request, 'register.html', {'msg': 'Selected group does not exist', 'groups': groups, 'brokers': brokers})
-                
-                Broker = None
-                if broker_id:
-                    try:
-                        Broker = BROKERS.objects.get(broker_name=broker_id)
-                    except BROKERS.DoesNotExist:
-                        return render(request, 'register.html', {'msg': 'Selected broker does not exist', 'groups': groups, 'brokers': brokers})
+            if ind_clientDT.objects.filter(clint_email=c_email).exists():
+                return render(request, 'register.html', {
+                    'msg': 'Email already registered',
+                    'groups': groups, 
+                    'brokers': brokers, 
+                    'options': options,
+                    'selected_option': selected_option,
+                    'subadmin': subadmin
+                })
 
-                try:
-                
-                    
-                    subject = f'Dear {c_fname} {c_lname}'
-                    message = f""" {c_fname} {c_lname}
-                    Thank you for choosing Tradifyme as your Algo Platform. We are pleased to inform you that your login details have been successfully set up. Please find the details below:
+            Group = None
+            if group_id:
+                Group = GROUP.objects.filter(id=group_id).first()
+                if not Group:
+                    return render(request, 'register.html', {
+                        'msg': 'Selected group does not exist',
+                        'groups': groups, 
+                        'brokers': brokers, 
+                        'options': options,
+                        'selected_option': selected_option,
+                        'subadmin': subadmin
+                    })
 
-                    **Login Details:**
+            Broker = None
+            if broker_id:
+                Broker = BROKERS.objects.filter(broker_name=broker_id).first()
 
-                    - **Email ID / User ID:** {email_from}
-                    - **Login Password:** {password}
+            # Create the client instance
+            client_instance = ind_clientDT.objects.create(
+                clint_name_first=c_fname,
+                clint_name_last=c_lname,
+                clint_email=c_email,
+                clint_password=password,  # Remember to hash passwords!
+                clint_phone_number=c_mno,
+                clint_date_joined=c_from_date,
+                clint_last_login=c_last_date,
+                client_Group=Group,
+                clint_plane=account_type,
+                broker=Broker,
+                api_key=api_key,
+                secret_key=secret_key,
+                app_id=app_id,
+                # demate_user_id=demate_user_id,
+                selected_option=selected_option,
+                sub_admin_id=sub_admin,
+                user_id=user_id,
+                password=password_brokar
+            )
 
-                    **Important:** We strongly recommend that you change your login password to one of your choice at the earliest convenience.
+            # Send the registration email
+            subject = f'Welcome {c_fname} {c_lname} to Tradifyme'
+            message = f"""Dear {c_fname} {c_lname},
 
-                    You can log in to your account using the following URL:
-                    [https://app.Tradifyme.com](https://app.Tradifyme.com)
+            Thank you for choosing Tradifyme for your Algo Platform needs. We are pleased to inform you that your account has been successfully registered with the following details:
 
-                    We appreciate your trust in Tradifyme and are committed to providing you with the best service.
+            Email ID / User ID: {c_email}
+            Login Password: {password}
 
-                    Best regards,
+            Please change your login password as per your preference after logging in.
 
-                    The Tradifyme Team
-                    """
-                    email_from = settings.EMAIL_HOST_USER
-                    recipient_list = [c_email]
-                    send_mail(subject, message, email_from, recipient_list)
-                    
-                    ind_clientDT.objects.create(
-                        clint_name_first=c_fname,
-                        clint_name_last=c_lname,
-                        clint_email=c_email,
-                        clint_password=password,
-                        clint_phone_number=c_mno,
-                        clint_date_joined=c_from_date,
-                        clint_last_login=c_last_date,
-                        client_Group=Group,
-                        clint_plane=account_type,
-                        broker=Broker,
-                        # api_key=api_key,
-                        # secret_key=upstox_secret_key,
-                        
-                        api_key=api_key_to_use,
-                        secret_key=secret_key_to_use, 
-                        app_id=app_id,
-                        user_id=user_id_to_use,                
-                       
-                    )
-                 #   client.strategies.set(selected_strategies)
-                    
-                    return redirect('client_detail')
-                except Exception as e:
-                    logger.error(f"Email sending failed: {e}")
-                    return render(request, 'register.html', {'msg': f'Error sending email: {e}', 'groups': groups, 'brokers': brokers, 'strategies': strategies}) 
-                
+            You can login here: https://app.tradifyme.com
+
+            Best regards,
+            The Tradifyme Team
+            """
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [c_email]
+            send_mail(subject, message, email_from, recipient_list)
+
+            return redirect('client_detail')
         except Exception as e:
             logger.error(f"Client registration failed: {e}")
-            return render(request, 'register.html', {'msg': f'Error: {e}', 'groups': groups, 'brokers': brokers, 'strategies': strategies}) 
-    
-    return render(request, 'register.html', {'groups': groups, 'brokers': brokers, 'strategies': strategies})
+            return render(request, 'register.html', {
+                'msg': f'Error: {e}',
+                'groups': groups, 
+                'brokers': brokers, 
+                'options': options,
+                'selected_option': selected_option,
+                'subadmin': subadmin
+            })
 
-
+    return render(request, 'register.html', {
+        'groups': groups, 
+        'brokers': brokers, 
+        'options': options,
+        'subadmin': subadmin
+    })
 
 
 # ===================================== Get singnal ================================================
